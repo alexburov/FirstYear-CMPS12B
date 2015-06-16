@@ -1,0 +1,12 @@
+total 13
+drwx------.  2 oburov  users 2048 Jan  5 10:50 .
+drwx------. 34 wmackey users 2048 Jan  5 10:41 ..
+-rw-r--r--.  1 oburov  users  220 Jan  5 10:09 1_01_private-lab0
+-rw-r--r--.  1 oburov  users   29 Jan  5 10:11 1_02_date
+-rw-r--r--.  1 oburov  users  227 Jan  5 10:12 1_03_acl
+-rw-r--r--.  1 oburov  users    5 Jan  5 10:14 1_04_which_shell
+-rw-r--r--.  1 oburov  users   77 Jan  5 10:16 1_05_getent
+-rw-r--r--.  1 oburov  users   21 Jan  5 10:25 1_.bash_profile
+-rw-r--r--.  1 oburov  users   38 Jan  5 10:21 1_.bashrc
+-rw-r--r--.  1 oburov  users  121 Jan  5 10:38 1_goodbye.java
+-rwxr-xr-x.  1 oburov  users   53 Jan  5 10:49 1_mk.goodbye

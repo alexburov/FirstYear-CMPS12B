@@ -1,0 +1,31 @@
+head	1.1;
+access;
+symbols;
+locks;
+comment	@# @;
+
+
+1.1
+date	2014.05.01.00.37.19;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@-
+@
+text
+@#!/bin/sh
+# $Id$
+mk *.c
+for file in *.c
+do
+   more $file $file.log >$file.lis </dev/null
+done
+mkpspdf Listing.ps mk* *.lis
+@

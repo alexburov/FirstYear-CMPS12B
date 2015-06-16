@@ -1,0 +1,8 @@
+lrwxr-xr-x. 1 oburov 153316 39 Jan 12 15:39 /afs/cats.ucsc.edu/users/o/oburov/12b -> /afs/cats.ucsc.edu/courses/cmps012b-wm/
+  File: `/afs/cats.ucsc.edu/users/o/oburov/12b' -> `/afs/cats.ucsc.edu/courses/cmps012b-wm/'
+  Size: 39        	Blocks: 2          IO Block: 4096   symbolic link
+Device: 15h/21d	Inode: 1508125282  Links: 1
+Access: (0755/lrwxr-xr-x)  Uid: (202443/  oburov)   Gid: (153316/ UNKNOWN)
+Access: 2015-01-12 15:39:15.000000000 -0800
+Modify: 2015-01-12 15:39:15.000000001 -0800
+Change: 2015-01-12 15:39:15.000000000 -0800

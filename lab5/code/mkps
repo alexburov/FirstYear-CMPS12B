@@ -1,0 +1,8 @@
+#!/bin/sh
+# $Id: mkps,v 1.1 2014-04-30 17:37:19-07 - - $
+mk *.c
+for file in *.c
+do
+   more $file $file.log >$file.lis </dev/null
+done
+mkpspdf Listing.ps mk* *.lis

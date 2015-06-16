@@ -1,0 +1,1089 @@
+head	1.60;
+access;
+symbols;
+locks;
+comment	@ * @;
+
+
+1.60
+date	2015.03.21.00.10.37;	author -;	state -;
+branches;
+next	1.59;
+
+1.59
+date	2015.03.21.00.10.20;	author -;	state -;
+branches;
+next	1.58;
+
+1.58
+date	2015.03.21.00.09.27;	author -;	state -;
+branches;
+next	1.57;
+
+1.57
+date	2015.03.12.02.34.50;	author -;	state -;
+branches;
+next	1.56;
+
+1.56
+date	2015.03.12.02.26.43;	author -;	state -;
+branches;
+next	1.55;
+
+1.55
+date	2015.03.12.02.25.44;	author -;	state -;
+branches;
+next	1.54;
+
+1.54
+date	2015.03.12.02.24.27;	author -;	state -;
+branches;
+next	1.53;
+
+1.53
+date	2015.03.12.02.23.43;	author -;	state -;
+branches;
+next	1.52;
+
+1.52
+date	2015.03.12.02.22.47;	author -;	state -;
+branches;
+next	1.51;
+
+1.51
+date	2015.03.12.02.22.37;	author -;	state -;
+branches;
+next	1.50;
+
+1.50
+date	2015.03.12.02.22.12;	author -;	state -;
+branches;
+next	1.49;
+
+1.49
+date	2015.03.12.02.15.54;	author -;	state -;
+branches;
+next	1.48;
+
+1.48
+date	2015.03.12.02.15.09;	author -;	state -;
+branches;
+next	1.47;
+
+1.47
+date	2015.03.12.02.14.31;	author -;	state -;
+branches;
+next	1.46;
+
+1.46
+date	2015.03.11.04.11.11;	author -;	state -;
+branches;
+next	1.45;
+
+1.45
+date	2015.03.11.04.09.58;	author -;	state -;
+branches;
+next	1.44;
+
+1.44
+date	2015.03.11.04.09.12;	author -;	state -;
+branches;
+next	1.43;
+
+1.43
+date	2015.03.11.04.07.06;	author -;	state -;
+branches;
+next	1.42;
+
+1.42
+date	2015.03.11.04.05.35;	author -;	state -;
+branches;
+next	1.41;
+
+1.41
+date	2015.03.11.04.05.06;	author -;	state -;
+branches;
+next	1.40;
+
+1.40
+date	2015.03.11.04.04.27;	author -;	state -;
+branches;
+next	1.39;
+
+1.39
+date	2015.03.11.04.03.58;	author -;	state -;
+branches;
+next	1.38;
+
+1.38
+date	2015.03.11.04.03.39;	author -;	state -;
+branches;
+next	1.37;
+
+1.37
+date	2015.03.11.04.03.02;	author -;	state -;
+branches;
+next	1.36;
+
+1.36
+date	2015.03.11.03.48.45;	author -;	state -;
+branches;
+next	1.35;
+
+1.35
+date	2015.03.11.03.48.08;	author -;	state -;
+branches;
+next	1.34;
+
+1.34
+date	2015.03.11.03.46.43;	author -;	state -;
+branches;
+next	1.33;
+
+1.33
+date	2015.03.11.03.46.31;	author -;	state -;
+branches;
+next	1.32;
+
+1.32
+date	2015.03.11.03.34.56;	author -;	state -;
+branches;
+next	1.31;
+
+1.31
+date	2015.03.11.03.34.47;	author -;	state -;
+branches;
+next	1.30;
+
+1.30
+date	2015.03.11.03.33.20;	author -;	state -;
+branches;
+next	1.29;
+
+1.29
+date	2015.03.11.03.33.16;	author -;	state -;
+branches;
+next	1.28;
+
+1.28
+date	2015.03.11.03.33.05;	author -;	state -;
+branches;
+next	1.27;
+
+1.27
+date	2015.03.11.03.32.49;	author -;	state -;
+branches;
+next	1.26;
+
+1.26
+date	2015.03.11.03.32.05;	author -;	state -;
+branches;
+next	1.25;
+
+1.25
+date	2015.03.11.03.28.18;	author -;	state -;
+branches;
+next	1.24;
+
+1.24
+date	2015.03.11.03.28.13;	author -;	state -;
+branches;
+next	1.23;
+
+1.23
+date	2015.03.11.03.27.54;	author -;	state -;
+branches;
+next	1.22;
+
+1.22
+date	2015.03.11.03.27.21;	author -;	state -;
+branches;
+next	1.21;
+
+1.21
+date	2015.03.11.03.27.14;	author -;	state -;
+branches;
+next	1.20;
+
+1.20
+date	2015.03.11.03.27.00;	author -;	state -;
+branches;
+next	1.19;
+
+1.19
+date	2015.03.11.03.25.47;	author -;	state -;
+branches;
+next	1.18;
+
+1.18
+date	2015.03.11.03.25.16;	author -;	state -;
+branches;
+next	1.17;
+
+1.17
+date	2015.03.11.03.24.51;	author -;	state -;
+branches;
+next	1.16;
+
+1.16
+date	2015.03.11.03.24.23;	author -;	state -;
+branches;
+next	1.15;
+
+1.15
+date	2015.03.11.03.23.52;	author -;	state -;
+branches;
+next	1.14;
+
+1.14
+date	2015.03.11.03.23.31;	author -;	state -;
+branches;
+next	1.13;
+
+1.13
+date	2015.03.11.03.21.38;	author -;	state -;
+branches;
+next	1.12;
+
+1.12
+date	2015.03.11.03.21.15;	author -;	state -;
+branches;
+next	1.11;
+
+1.11
+date	2015.03.11.03.15.28;	author -;	state -;
+branches;
+next	1.10;
+
+1.10
+date	2015.03.11.03.14.35;	author -;	state -;
+branches;
+next	1.9;
+
+1.9
+date	2015.03.11.03.14.08;	author -;	state -;
+branches;
+next	1.8;
+
+1.8
+date	2015.03.11.03.07.18;	author -;	state -;
+branches;
+next	1.7;
+
+1.7
+date	2015.03.11.03.06.41;	author -;	state -;
+branches;
+next	1.6;
+
+1.6
+date	2015.03.11.01.00.36;	author -;	state -;
+branches;
+next	1.5;
+
+1.5
+date	2015.03.11.01.00.00;	author -;	state -;
+branches;
+next	1.4;
+
+1.4
+date	2015.03.11.00.58.09;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2015.03.11.00.57.40;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2015.03.11.00.56.16;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2015.03.11.00.55.40;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.60
+log
+@-
+@
+text
+@// $Id: inssort.c,v 1.59 2015-03-20 17:10:20-07 - - $
+// Author Olexiy Burov, oburov@@ucsc.edu
+
+#include "inssort.h"
+#include <string.h>
+
+void swap(void *this, void *that, size_t size) {
+   void *temp = malloc(size);
+   memcpy(temp, this, size);
+   memcpy(this, that, size);
+   memcpy(that, temp, size);
+   free(temp);
+}
+
+void inssort (void* base, size_t nelem, size_t size,
+              int (*compar) (const void*, const void*)) {
+   char *array = (char*)base;
+   for (size_t sorted = 1; sorted < nelem; ++sorted) {
+      int slot = sorted;
+      void *copy = malloc(size);
+      memcpy(copy,array[slot],size);
+      for (; slot > 0; --slot) {
+         int cmp = (*compar)(array + slot * size, 
+                             array + (slot -1) * size);
+         if (cmp > 0) break;
+         memcpy(array[slot],array[slot - 1],size);
+//         swap(array + slot * size, array + (slot-1) * size, size);
+      }
+      memcpy(array[slot],copy,size);
+   }
+}
+@
+
+
+1.59
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: inssort.c,v 1.58 2015-03-20 17:09:27-07 - - $
+d21 1
+a21 1
+      memcpy(copy,base[slot],size);
+@
+
+
+1.58
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: inssort.c,v 1.57 2015-03-11 19:34:50-07 - - $
+d21 1
+a21 1
+      memcpy(copy,array[slot],size);
+@
+
+
+1.57
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id$
+d20 2
+d26 2
+a27 1
+         swap(array + slot * size, array + (slot-1) * size, size);
+d29 1
+@
+
+
+1.56
+log
+@-
+@
+text
+@d1 3
+a19 2
+      //void *temp = array + slot * size;
+      //void *copy = temp;
+a25 1
+     //temp = copy;
+@
+
+
+1.55
+log
+@-
+@
+text
+@d17 2
+a18 2
+      void *temp = array + slot * size;
+      void *copy = temp;
+d25 1
+a25 1
+     temp = copy;
+@
+
+
+1.54
+log
+@-
+@
+text
+@d17 2
+a18 2
+      //void *temp = array + slot * size;
+      //void *copy = temp;
+d25 1
+a25 1
+     //temp = copy;
+@
+
+
+1.53
+log
+@-
+@
+text
+@d17 2
+a18 2
+      void *temp = array + slot * size;
+      void *copy = temp;
+d25 1
+a25 1
+     temp = copy;
+@
+
+
+1.52
+log
+@-
+@
+text
+@d17 2
+a18 1
+      void *copy = array + slot * size;
+d25 1
+a25 1
+     *(array + slot * size) = copy;
+@
+
+
+1.51
+log
+@-
+@
+text
+@d24 1
+a24 1
+     (char*) (array + slot * size) = copy;
+@
+
+
+1.50
+log
+@-
+@
+text
+@d24 1
+a24 1
+      (array + slot * size) = copy;
+@
+
+
+1.49
+log
+@-
+@
+text
+@d17 1
+a17 1
+      //void *copy = array + slot * size;
+d24 1
+a24 1
+      //swap(array + slot * size, copy, size);
+@
+
+
+1.48
+log
+@-
+@
+text
+@d17 1
+a17 1
+      void *copy = array + slot * size;
+d24 1
+a24 1
+      swap(array + slot * size, copy, size);
+@
+
+
+1.47
+log
+@-
+@
+text
+@d24 1
+a24 1
+      swap(array + slot * size, copy);
+@
+
+
+1.46
+log
+@-
+@
+text
+@d17 1
+d24 1
+@
+
+
+1.45
+log
+@-
+@
+text
+@d18 2
+a19 4
+      //   void *ele1 = (char *) base + slot * size;
+       //  void *ele2 = (char *) base + (slot-1) * size;
+        // int cmp = (*compar)(ele1, ele2);
+         int cmp = (*compar)(array + slot * size, array + (slot -1) * size);
+d21 1
+a21 2
+         //swap(ele1,ele2, size);
+         swap(array[slot * size], array[(slot-1) * size], size);
+@
+
+
+1.44
+log
+@-
+@
+text
+@d24 1
+a24 1
+         swap(array + slot * size, array + (slot-1) * size, size);
+@
+
+
+1.43
+log
+@-
+@
+text
+@d14 1
+a14 1
+   char **array = (char**)base;
+d21 1
+a21 1
+         int cmp = (*compar)(array[slot], array[(slot-1)]);
+d24 1
+a24 1
+         swap(array[slot * size], array[(slot-1)*size], size);
+@
+
+
+1.42
+log
+@-
+@
+text
+@d21 1
+a21 1
+         int cmp = (*compar)(array[slot * size], array[(slot-1) * size]);
+@
+
+
+1.41
+log
+@-
+@
+text
+@d14 1
+a14 1
+   char *array = (char*)base;
+@
+
+
+1.40
+log
+@-
+@
+text
+@d14 1
+a14 1
+   char **array = (char**)base;
+@
+
+
+1.39
+log
+@-
+@
+text
+@d24 1
+a24 1
+         swap(array[slot * size], array[(slot-1)*size, size]);
+@
+
+
+1.38
+log
+@-
+@
+text
+@d24 1
+a24 1
+         swap(array[slot * size], array[(slot-1)*size]);
+@
+
+
+1.37
+log
+@-
+@
+text
+@d23 2
+a24 1
+         swap(ele1,ele2, size);
+@
+
+
+1.36
+log
+@-
+@
+text
+@d14 1
+d18 4
+a21 3
+         void *ele1 = (char *) base + slot * size;
+         void *ele2 = (char *) base + (slot-1) * size;
+         int cmp = (*compar)(ele1, ele2);
+@
+
+
+1.35
+log
+@-
+@
+text
+@a15 2
+      void *copy = (char *) base + sorted * size;
+      void *key = copy;
+@
+
+
+1.34
+log
+@-
+@
+text
+@a24 1
+      copy = key;
+@
+
+
+1.33
+log
+@-
+@
+text
+@d23 1
+a23 1
+         swap(ele1,ele2);
+@
+
+
+1.32
+log
+@-
+@
+text
+@d4 8
+d23 1
+a23 4
+         char *temp = malloc(size);
+         memcpy(temp, ele1, size);
+         memcpy(ele1, ele2, size);
+         memcpy(ele2, temp, size);
+a25 1
+//      array[slot] = copy;
+@
+
+
+1.31
+log
+@-
+@
+text
+@a5 1
+   char **array = (char **)base;
+@
+
+
+1.30
+log
+@-
+@
+text
+@d3 1
+d10 1
+d21 2
+a22 1
+      array[slot] = copy;
+@
+
+
+1.29
+log
+@-
+@
+text
+@a1 1
+#include <stdio.h>
+@
+
+
+1.28
+log
+@-
+@
+text
+@d3 1
+@
+
+
+1.27
+log
+@-
+@
+text
+@d2 1
+a2 1
+#include <stdlib.h>
+@
+
+
+1.26
+log
+@-
+@
+text
+@d2 1
+@
+
+
+1.25
+log
+@-
+@
+text
+@d9 3
+a11 1
+         int cmp = (*compar) ((char *)base + slot * size, (char *)base + (slot-1) * size);
+d13 4
+a17 1
+      *(char **)base[slot] = copy;
+@
+
+
+1.24
+log
+@-
+@
+text
+@d12 1
+a12 1
+      (char **)base[slot] = copy;
+@
+
+
+1.23
+log
+@-
+@
+text
+@d12 1
+a12 1
+      (char *)base[slot] = copy;
+@
+
+
+1.22
+log
+@-
+@
+text
+@a8 3
+         //void *ele1 = (char *) base + slot * size;
+         //void *ele2 = (char *) base + (slot-1) * size;
+         //int cmp = (*compar) (ele1, ele2);
+a10 1
+         //ele1 = ele2;
+d12 1
+@
+
+
+1.21
+log
+@-
+@
+text
+@d14 1
+a14 1
+         ele1 = ele2;
+@
+
+
+1.20
+log
+@-
+@
+text
+@d9 2
+a10 2
+         void *ele1 = (char *) base + slot * size;
+         void *ele2 = (char *) base + (slot-1) * size;
+@
+
+
+1.19
+log
+@-
+@
+text
+@d11 2
+a12 1
+         int cmp = (*compar) (ele1, ele2);
+@
+
+
+1.18
+log
+@-
+@
+text
+@d4 1
+d15 1
+a15 1
+      (char **)base[slot] = copy;
+@
+
+
+1.17
+log
+@-
+@
+text
+@d14 1
+a14 1
+      (char *)base[slot] = copy;
+@
+
+
+1.16
+log
+@-
+@
+text
+@a3 1
+   char **array = (char **)base;
+d14 1
+a14 1
+      array[slot] = copy;
+@
+
+
+1.15
+log
+@-
+@
+text
+@a7 1
+      void *key = copy;
+d15 1
+a15 1
+      copy = key;
+@
+
+
+1.14
+log
+@-
+@
+text
+@d4 1
+a4 1
+   (char **)array = base;
+@
+
+
+1.13
+log
+@-
+@
+text
+@d4 1
+@
+
+
+1.12
+log
+@-
+@
+text
+@d13 1
+a13 1
+         base[slot] = base[slot - 1];
+@
+
+
+1.11
+log
+@-
+@
+text
+@d7 1
+d9 3
+a11 1
+         int cmp = (*compar) (copy, base[slot - 1]);
+d15 1
+a15 1
+      base[slot] = copy;
+@
+
+
+1.10
+log
+@-
+@
+text
+@d8 1
+a8 1
+         int cmp = (*compar) (copy, (char *)base[slot - 1]);
+d10 1
+a10 1
+         (char *)base[slot] = (char *)base[slot - 1];
+d12 1
+a12 1
+      (char *)base[slot] = copy;
+@
+
+
+1.9
+log
+@-
+@
+text
+@d10 1
+a10 1
+         base[slot] = (char *)base[slot - 1];
+@
+
+
+1.8
+log
+@-
+@
+text
+@d8 1
+a8 1
+         int cmp = (*compar) (copy, base[slot - 1]);
+d10 1
+a10 1
+         base[slot] = base[slot - 1];
+d12 1
+a12 1
+      base[slot] = copy;
+@
+
+
+1.7
+log
+@-
+@
+text
+@d8 1
+a8 1
+         int cmp = compar (copy, base[slot - 1]);
+@
+
+
+1.6
+log
+@-
+@
+text
+@a1 1
+/*
+d6 1
+a6 1
+      void* copy = base[slot];
+a14 1
+*/
+@
+
+
+1.5
+log
+@-
+@
+text
+@a16 4
+
+void print_debug() {
+   printf("DEBUG !\n");
+}
+@
+
+
+1.4
+log
+@-
+@
+text
+@d2 1
+a2 1
+
+d16 1
+@
+
+
+1.3
+log
+@-
+@
+text
+@d9 1
+a9 1
+         int cmp = compar (copy, array[slot - 1]);
+d11 1
+a11 1
+         base[slot] =base[slot - 1];
+@
+
+
+1.2
+log
+@-
+@
+text
+@d11 1
+a11 1
+         array[slot] = array[slot - 1];
+d13 1
+a13 1
+      array[slot] = copy;
+@
+
+
+1.1
+log
+@-
+@
+text
+@d5 1
+a5 1
+   for (int sorted = 1; sorted < nelem; ++sorted) {
+@

@@ -1,0 +1,31 @@
+::::::::::::::
+err.c
+::::::::::::::
+// $Id: err.c,v 1.5 2014-04-23 21:19:13-07 - - $
+
+#include <stdio.h>
+void foo() {
+   int x = 20;
+   int *p = &x;
+}
+void bar() {
+   int a;
+   int *p;
+   printf ("%d %p\n", a, p);
+}
+int main() {
+   foo();
+   bar();
+}
+::::::::::::::
+err.c.log
+::::::::::::::
+err.c: In function 'foo':
+err.c:6:9: warning: unused variable 'p' [-Wunused-variable]
+    int *p = &x;
+         ^
+err.c: In function 'bar':
+err.c:11:11: warning: 'a' is used uninitialized in this function [-Wuninitialized]
+    printf ("%d %p\n", a, p);
+           ^
+err.c:11:11: warning: 'p' is used uninitialized in this function [-Wuninitialized]

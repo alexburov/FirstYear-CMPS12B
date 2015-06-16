@@ -1,0 +1,27 @@
+A few notes about the put method that I deem important:
+1) If the key was not previously in the tree it creates
+a new node for it and returns the value of the newly
+created node.
+2) If the key was in the binary tree it would replace
+the old value with the new value, but RETURN the old one.
+
+And also a few words about the exit statuses:
+Whenever we encounter the wrong line in the database we read
+the program prints a message to System.err indicating the line
+number with invalid line on it and changing the exit status to 1.
+
+Whenever the program fails to find the airport user searches for,
+the corresponding error message is printed to System.err and exit
+status changed to 1.
+
+In all the following cases the program does not quit immediatly,
+but continues reading the database and user input.
+
+It only exits in three cases:
+1) The database cannot be opened.
+2) Invalid option was specified.
+3) No operands were passed(no database name given).
+
+Best,
+
+Olexiy Burov.

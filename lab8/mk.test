@@ -1,0 +1,12 @@
+#!/bin/sh -x
+# $Id: mk.test,v 1.8 2015-02-27 13:02:58-08 - - $
+ROOT=/afs/cats.ucsc.edu/courses/cmps012b-wm
+TESTDIR=$ROOT/Labs-cmps012m/lab8c-unixprog-stat/testdata
+ln -s $TESTDIR testdir
+mstat Makefile mstat* 1>test1.stdout 2>test1.stderr
+echo status=$? >test1.status
+mstat /foo/bar/baz . / .. /no/such 1>test2.stdout 2>test2.stderr
+echo status=$? >test2.status
+mstat testdir/* testdir 1>test3.stdout 2>test3.stderr
+echo status=$? >test3.status
+valgrind mstat * 1>testv.stdout 2>testv.stderr

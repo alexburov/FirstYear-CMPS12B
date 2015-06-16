@@ -1,0 +1,2 @@
+mstat: /foo/bar/baz: No such file or directory
+mstat: /no/such: No such file or directory

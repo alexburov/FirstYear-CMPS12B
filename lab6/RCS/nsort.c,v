@@ -1,0 +1,116 @@
+head	1.1;
+access;
+symbols;
+locks;
+comment	@ * @;
+
+
+1.1
+date	2015.02.18.08.15.12;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@-
+@
+text
+@// $Id:$
+// Author Olexiy Burov, oburov@@ucsc.edu
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <libgen.h>
+#include <unistd.h>
+
+typedef struct node node;
+struct node {
+   double item;
+   node *link;
+};
+
+node *head = NULL;
+
+void insert_ascending(double new_item) {
+   node *prev = NULL;
+   node *curr = head;
+
+   while(curr != NULL) {
+      if (curr->item > new_item) break;
+      prev = curr;
+      curr = curr->link;
+   }
+
+   node *temp = malloc(sizeof(struct node));
+   assert(temp != NULL);
+   temp->item = new_item;
+   temp->link = curr;
+   if (prev == NULL) head = temp;
+                 else prev->link = temp;
+}
+
+void free_list() {
+   while(head != NULL) {
+      node *old = head;
+      head = head->link;
+      free(old);
+   }
+}
+
+void print_list() {
+    for (node *curr = head; curr != NULL; curr = curr->link)
+      printf("%24.15g\n", curr->item);
+}
+
+void print_debug(char *program_name) {
+   printf ("%s: head= %p\n", program_name, head);
+   while (head != NULL) {
+      node *old = head;
+      head = head->link;
+      printf ("%s: %p-> node {\n"
+              "    item= %24.15g\n"
+              "    link= %p}\n",
+              program_name, old, old->item, old->link);
+   }
+}
+
+int main(int argc, char ** argv) {
+   char *program_name = basename (argv[0]);
+   int exit_status = EXIT_SUCCESS;
+   char error_buffer[256];
+
+
+
+   for (;;) {
+      double number;
+      int scan_status = scanf("%lg", &number);
+
+
+      if (scan_status == EOF) {
+         break;
+      } else if (scan_status == 1) {
+         insert_ascending(number);
+      } else {
+         scan_status = scanf("%s", &error_buffer);
+         assert(scan_status == 1);
+         fprintf(stderr,"%s: bad number \"%s\"\n",
+                       program_name,error_buffer);
+         exit_status = EXIT_FAILURE;
+      }
+   }
+
+   int opt = getopt(argc, argv, "d");
+   if (opt == 'd') {
+      print_debug(program_name);
+   } else {
+       print_list();
+   }
+   free_list();
+   return exit_status;
+}
+@

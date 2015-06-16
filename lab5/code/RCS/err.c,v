@@ -1,0 +1,98 @@
+head	1.5;
+access;
+symbols;
+locks;
+comment	@ * @;
+
+
+1.5
+date	2014.04.24.04.19.13;	author -;	state -;
+branches;
+next	1.4;
+
+1.4
+date	2014.02.18.22.18.08;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2014.02.18.22.17.33;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2014.02.18.22.15.39;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2014.02.18.22.15.26;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.5
+log
+@-
+@
+text
+@// $Id$
+
+#include <stdio.h>
+void foo() {
+   int x = 20;
+   int *p = &x;
+}
+void bar() {
+   int a;
+   int *p;
+   printf ("%d %p\n", a, p);
+}
+int main() {
+   foo();
+   bar();
+}
+@
+
+
+1.4
+log
+@-
+@
+text
+@d1 2
+@
+
+
+1.3
+log
+@-
+@
+text
+@d4 1
+@
+
+
+1.2
+log
+@-
+@
+text
+@d2 4
+a5 1
+int main() {
+d10 4
+@
+
+
+1.1
+log
+@-
+@
+text
+@d1 1
+@

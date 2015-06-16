@@ -1,0 +1,25 @@
+Dear Grader,
+
+So I have implemented everything as instructed. There is a memory loss
+of 8 bytes, according to valgrind, but it occures in scanner.l,
+so that should be fine.
+
+Another thing I think is important to inform you about are
+preconditions in my method do_add and do_sub.
+The thing is that we always treat bigint *this as the "largest" bigint
+while *that is always the "smallest" bigint. It's insured in the method
+add_bigint and sub_bigint. I always pass the largest as the first
+argument and smallest as the second one.
+
+Anothet detail is that the determoination of the smallest and largest
+is done in get_largest() function, which I defined and implemented
+myself. So you can think about it as do_compare function in the score
+file. Once we know which one is the largest it's easy to figure out
+the smallest one.
+
+So far I think these are the only tricky moments about my implementa-
+tion of the assignment 4.
+
+Best,
+
+Olexiy Burov.

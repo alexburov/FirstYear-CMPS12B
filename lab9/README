@@ -1,0 +1,10 @@
+Dear Grader,
+So nothing special, three source files.
+linesort.c and numsort.c are very straightforward
+(they have all the comments that you might need)
+inssort looks a bit different, but that simply because
+ I decided to write a small swap function rather then
+ do it in the sort itself.
+All the test from the score folder looked right.
+Best,
+Olexiy Burov.

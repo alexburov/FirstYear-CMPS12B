@@ -1,0 +1,299 @@
+head	1.4;
+access;
+symbols;
+locks;
+comment	@# @;
+
+
+1.4
+date	2015.01.19.03.10.13;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2015.01.18.01.28.20;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2015.01.17.05.36.16;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2015.01.17.05.28.12;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.4
+log
+@-
+@
+text
+@// $Id: month.java,v 1.3 2015-01-17 17:28:20-08 - - $
+// Author: Olexiy Burov, oburov@@ucsc.edu
+
+// Describes a calendar month.
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
+public class month {
+   // Change date for British Empire.
+   static final GregorianCalendar CHANGE_DATE
+      = new GregorianCalendar(1752, Calendar.SEPTEMBER, 14);
+
+   static final int WEEKS_IN_MONTH = 6;
+   static final int DAYS_IN_WEEK = 7;
+
+   // Array which stores all the days in.
+   private int[][] month = null;
+
+   // Calendar which iterates through dates.
+   private GregorianCalendar calendar = new GregorianCalendar();
+
+   // Locale which affects the language used to print dates.
+   private static Locale locale = Locale.getDefault();
+
+   // Helper method for getting first 2 letter of the day of the week.
+   private static String prefix (String string, int length) {
+      return length > string.length ()
+         ? string
+         : string.substring (0, length);
+   }
+
+   // Sets locale.
+   public static void set_locale(Locale new_locale) {
+      locale = new_locale;
+   }
+
+   // Constructor for month, creates specified month.
+   public month(int calmonth, int calyear) {
+      // Sets change.
+      calendar.setGregorianChange(CHANGE_DATE.getTime());
+
+      // Initializes array of days of the month.
+      month = new int[WEEKS_IN_MONTH][DAYS_IN_WEEK];
+
+      // Starting from the first day, we fill up the month.
+      calendar.set(calyear, calmonth, 1);
+      while (calmonth == calendar.get(GregorianCalendar.MONTH)) {
+         int calday = calendar.get(GregorianCalendar.DAY_OF_MONTH);
+         int weekday = calendar.get(GregorianCalendar.DAY_OF_WEEK) - 1;
+         int week = calendar.get(GregorianCalendar.WEEK_OF_MONTH) - 1;
+         month[week][weekday] = calday;
+         calendar.add(GregorianCalendar.DAY_OF_MONTH, 1);
+      }
+      calendar.set(calyear, calmonth, 1);
+   }
+
+   // Returns a string containing day names of the week.
+   public String daynames() {
+      StringBuffer string_buffer = new StringBuffer();
+      calendar.set(Calendar.DAY_OF_WEEK,1);
+      for (int i = 0;i < DAYS_IN_WEEK - 1;i++)
+      {
+         string_buffer.append(
+            prefix(String.format(locale,"%tA",calendar),2)+" ");
+
+         calendar.add(Calendar.DAY_OF_MONTH,1);
+      }
+      string_buffer.append(
+         prefix(String.format(locale,"%tA",calendar),2));
+
+      return string_buffer.toString();
+   }
+
+   // Returns centrally aligned string containing name of the month.
+   public String monthname() {
+      return misclib.central_align(String.format(locale, " %tB", calendar), 20);
+   }
+
+   // Returns month name followed by a year.
+   public String month_year() {
+      return String.format(locale, "%tB %d", calendar,
+         calendar.get(Calendar.YEAR));
+   }
+
+   // Returns string which represent one of six weeks in the month.
+   public String week_by_index(int index) {
+      StringBuffer string_buffer = new StringBuffer();
+
+      for (int i = 0; i < DAYS_IN_WEEK; i++) {
+         int dayOfWeek = month[index][i];
+
+         // First week empty days count as two whitespaces.
+         if (dayOfWeek == 0 && index < 1)
+            string_buffer.append("   ");
+         // Any other  week empty days do not count as symbols at all.
+         else if (dayOfWeek == 0)
+            string_buffer.append("");
+         else
+            string_buffer.append(String.format("%2d ", dayOfWeek));
+      }
+
+      // Trims the weeks, so that the are no extra whitespaces left in
+      // the end of the line.
+      try {
+         string_buffer.deleteCharAt(string_buffer.lastIndexOf(" "));
+      }
+
+      catch (Exception ex) {
+      }
+
+      return string_buffer.toString();
+   }
+
+   // toString implementation for the month class.
+   // returns string which represents month, year and all the days of
+   // that month in columns.
+   @@Override
+   public String toString() {
+      StringBuffer string_buffer = new StringBuffer();
+      string_buffer.append(String.format("%s%n%s%n",
+         misclib.central_align(month_year(), 20),
+         daynames()));
+
+      for (int i = 0; i < 6; i++) {
+         string_buffer.append(String.format("%s%n",
+            this.week_by_index(i)));
+      }
+
+      return string_buffer.toString();
+   }
+}
+@
+
+
+1.3
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id:$
+a58 13
+   // Helper method for centring the output
+   // Code is taken from:
+   // http://www.leveluplunch.com/java/examples/center-justify-string/
+   public static String central_align(String s, int width) {
+      int pad_size = width - s.length();
+      int pad_start = s.length() + pad_size / 2;
+
+      s = String.format("%" + pad_start + "s", s);
+      s = String.format("%-" + width + "s", s);
+
+      return s;
+   }
+
+d78 1
+a78 1
+      return central_align(String.format(locale, " %tB", calendar), 20);
+d123 1
+a123 1
+         central_align(month_year(), 20),
+@
+
+
+1.2
+log
+@-
+@
+text
+@d1 5
+a9 1
+
+d11 1
+d18 1
+d20 2
+d23 2
+d27 2
+a28 1
+   static String prefix (String string, int length) {
+d34 1
+d39 1
+d41 1
+d43 2
+d47 1
+d59 3
+d72 1
+d76 1
+a76 1
+      for (int i = 0;i < 6;i++)
+d78 2
+a79 1
+         string_buffer.append(prefix(String.format(locale,"%tA",calendar),2)+" ");
+d83 3
+a85 1
+      string_buffer.append(prefix(String.format(locale,"%tA",calendar),2));
+d89 1
+d94 1
+d100 1
+d107 1
+d110 1
+a114 17
+
+      }
+
+      /*
+      if (index < 1) {
+
+         for (int i = 0; i < DAYS_IN_WEEK; i++) {
+            int dayOfWeek;
+
+            dayOfWeek = month[index][i];
+
+            if (dayOfWeek == 0) {
+               string_buffer.append("   ");
+            } else {
+               string_buffer.append(String.format("%2d ", dayOfWeek));
+            }
+         }
+d117 2
+a118 15
+      else {
+         for (int i = 0; i < DAYS_IN_WEEK; i++) {
+            int dayOfWeek;
+
+            dayOfWeek = month[index][i];
+
+            if (dayOfWeek == 0) {
+               string_buffer.append("");
+            } else {
+               string_buffer.append(String.format("%2d ", dayOfWeek));
+            }
+         }
+      }
+      */
+
+d129 3
+a131 1
+
+@
+
+
+1.1
+log
+@-
+@
+text
+@d77 2
+d80 10
+d92 1
+a92 1
+         for (int i = 0; i < month[index].length; i++) {
+d106 2
+a107 2
+         for (int i = 0; i < month[index].length; i++) {
+            int dayOfWeek = 0;
+d118 1
+a124 1
+
+@

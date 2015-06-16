@@ -1,0 +1,33 @@
+lab1u-shells-etc/lab1u-shells-etc.tt:     Submit:  hello.java
+lab1u-shells-etc/lab1u-shells-etc.tt:     Submit:  mkhello
+lab1u-shells-etc/lab1u-shells-etc.tt:     Submit:  testhello
+lab1u-shells-etc/lab1u-shells-etc.tt:     Submit:  ~/.bashrc
+lab1u-shells-etc/lab1u-shells-etc.tt:     Submit:  ~/.bashrc
+lab1u-shells-etc/lab1u-shells-etc.tt:     Submit:  links
+lab1u-shells-etc/lab1u-shells-etc.tt:        bash-27$ grep Submit: *.tt
+lab1u-shells-etc/lab1u-shells-etc.tt:     This will list all of the lines with the string ``Submit:''.  Cut
+lab1u-shells-etc/lab1u-shells-etc.tt:     Submit:  submits
+lab2u-utilities-c-make/lab2u-utilities-c-make.tt:     Submit:  man.1.find
+lab2u-utilities-c-make/lab2u-utilities-c-make.tt:     Submit:  man.1.grep
+lab2u-utilities-c-make/lab2u-utilities-c-make.tt:     Submit:  asgs-labs-found
+lab2u-utilities-c-make/lab2u-utilities-c-make.tt: (4) Use the grep(1) command to search for the string ``Submit:'' in
+lab2u-utilities-c-make/lab2u-utilities-c-make.tt:        bash-06$ grep Submit: lab*/*.tt
+lab2u-utilities-c-make/lab2u-utilities-c-make.tt:     Submit:  grepped-submits
+lab2u-utilities-c-make/lab2u-utilities-c-make.tt:     Submit:  disk-usage
+lab2u-utilities-c-make/lab2u-utilities-c-make.tt:Submit:  hello.c
+lab2u-utilities-c-make/lab2u-utilities-c-make.tt:Submit:  Makefile
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:   grep Submit: *.tt
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part01.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part02.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part03.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part04.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part05.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part06.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  list2.c
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part07.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part08.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  list3.c
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part09.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  list4.c
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  part10.typescript
+lab5c-gdb-valgrind/lab5c-gdb-valgrind.tt:Submit:  environ.c

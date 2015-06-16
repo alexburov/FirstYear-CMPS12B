@@ -1,0 +1,450 @@
+head	1.11;
+access;
+symbols;
+locks;
+comment	@# @;
+
+
+1.11
+date	2015.01.20.05.46.50;	author -;	state -;
+branches;
+next	1.10;
+
+1.10
+date	2015.01.19.19.33.18;	author -;	state -;
+branches;
+next	1.9;
+
+1.9
+date	2015.01.19.03.08.37;	author -;	state -;
+branches;
+next	1.8;
+
+1.8
+date	2015.01.18.19.43.28;	author -;	state -;
+branches;
+next	1.7;
+
+1.7
+date	2015.01.18.01.25.47;	author -;	state -;
+branches;
+next	1.6;
+
+1.6
+date	2015.01.17.23.01.44;	author -;	state -;
+branches;
+next	1.5;
+
+1.5
+date	2015.01.17.05.27.13;	author -;	state -;
+branches;
+next	1.4;
+
+1.4
+date	2015.01.17.00.21.53;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2015.01.17.00.00.33;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2015.01.15.00.45.17;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2015.01.14.23.15.07;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.11
+log
+@-
+@
+text
+@// Author: Olexiy Burov, oburov@@ucsc.edu
+//
+// $Id: jcal.java,v 1.10 2015-01-19 11:33:18-08 - - $
+//
+// NAME
+//    jcal - prints calendar
+//
+// SYNOPSIS
+//    jcal [-locale] [[month] year]
+//
+// DESCRIPTION
+//    Program which displays the calendar for any particular
+//    month or year with international support.
+
+
+import java.util.Locale;
+import static java.lang.System.*;
+
+public class jcal {
+
+   // keeps track of the year.
+   private static int calyear = 0;
+
+   //keeps track of the month.
+   private static int calmonth = 0;
+
+   // transforms current time into year in form of integer.
+   static int intyear(long now) {
+      return Integer.parseInt(String.format("%tY", now));
+   }
+
+   // transforms current time into month in form if integer.
+   static int intmonth(long now) {
+      return Integer.parseInt(String.format("%tm", now));
+   }
+
+   // prints error about illegal year argument and exits with status 1.
+   private static void print_year_error() {
+      misclib.die("illegal year value: use 1-9999");
+   }
+
+   // prints error about illegal month argument and exits with status 1.
+   private static void print_month_error() {
+      misclib.die("illegal month value: use 1-12");
+   }
+
+   // reads year argument.
+   private static void read_year(String year) {
+
+      try {
+         calyear = Integer.parseInt(year);
+      }
+
+      catch (NumberFormatException ex) {
+         print_year_error();
+      }
+
+      if (calyear > 9999 || calyear < 1) {
+         print_year_error();
+      }
+   }
+
+   // reads month argument.
+   private static void read_month(String month) {
+      try {
+         calmonth = Integer.parseInt(month);
+      }
+
+      catch (NumberFormatException ex) {
+         print_month_error();
+      }
+
+      if (calmonth > 12 || calmonth < 1) {
+         print_month_error();
+      }
+
+      // decrease calmonth, because our calendar works with values 0-11.
+      calmonth--;
+   }
+
+   // displays current month.
+   private static void display_this_month() {
+      // get current time.
+      long now = System.currentTimeMillis();
+
+      // creates a month, based on current time.
+      month thisMonth = new month(intmonth(now) - 1, intyear(now));
+
+      // prints the month.
+      out.printf("%s", thisMonth);
+   }
+
+   // displays specific year.
+   private static void display_year(String year) {
+      read_year(year);
+
+      year some_year = new year(calyear);
+
+      out.printf("%s", some_year);
+   }
+
+   // displays specific month of a specific year.
+   private static void display_month(String month, String year) {
+      read_month(month);
+      read_year(year);
+
+      month some_month = new month(calmonth, calyear);
+
+      out.printf("%s", some_month);
+   }
+
+   public static void main(String[] args) {
+      // check if there are any locale options in the parameter list.
+      if (args.length > 0 && args[0].charAt(0) == '-'){
+         // if yes, assign locale for the month class.
+         String locale = args[0].substring(1);
+         month.set_locale(new Locale(locale));
+         switch (args.length) {
+            // only locale - prints current month.
+            case 1:
+               display_this_month();
+               break;
+            // locale + year(1-9999) - prints specified year.
+            case 2:
+               display_year(args[1]);
+               break;
+            // locale+month(1-12)+year(1-9999) - prints specified month
+            case 3:
+               display_month(args[1],args[2]);
+               break;
+         }
+      } else {
+
+         // if no locale options enabled:
+         switch (args.length) {
+            // prints current month(no arguments)
+            case 0:
+               display_this_month();
+               break;
+            // one argument, prints specified year(1-9999)
+            case 1:
+               display_year(args[0]);
+               break;
+            // two arguments, prints specified month.
+            case 2:
+               display_month(args[0],args[1]);
+               break;
+         }
+      }
+   }
+}
+@
+
+
+1.10
+log
+@-
+@
+text
+@d3 1
+a3 1
+// $Id: jcal.java,v 1.9 2015-01-18 19:08:37-08 - - $
+d17 1
+a17 2
+import static java.lang.System.err;
+import static java.lang.System.out;
+@
+
+
+1.9
+log
+@-
+@
+text
+@a0 1
+// $Id: jcal.java,v 1.8 2015-01-18 11:43:28-08 - - $
+d3 2
+@
+
+
+1.8
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: jcal.java,v 1.7 2015-01-17 17:25:47-08 - - $
+a26 3
+   // constant, which indicates exit status.
+   private static final int EXIT_FAILURE = 1;
+
+@
+
+
+1.7
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id$
+d42 1
+a42 2
+      err.println("jcal: illegal year value: use 1-9999");
+      System.exit(EXIT_FAILURE);
+d47 1
+a47 2
+      err.println("jcal: illegal month value: use 1-12");
+      System.exit(EXIT_FAILURE);
+@
+
+
+1.6
+log
+@-
+@
+text
+@d3 10
+@
+
+
+1.5
+log
+@-
+@
+text
+@d1 4
+a5 1
+
+@
+
+
+1.4
+log
+@-
+@
+text
+@d8 1
+d11 1
+d14 1
+d17 1
+d22 1
+d27 1
+d33 1
+d39 1
+d55 1
+d69 1
+d73 1
+d75 1
+d78 1
+d81 1
+d85 1
+d94 1
+d105 1
+d107 1
+d111 1
+d115 1
+d119 1
+d126 1
+d128 1
+d132 1
+d136 1
+@
+
+
+1.3
+log
+@-
+@
+text
+@d12 2
+d23 2
+a24 2
+      err.println("cal: illegal year value: use 1-9999");
+      System.exit(1);
+d28 2
+a29 2
+      err.println("cal: illegal month value: use 1-12");
+      System.exit(1);
+d63 25
+d94 1
+a94 5
+               long now = System.currentTimeMillis();
+
+               month thisMonth = new month(intmonth(now) - 1, intyear(now));
+
+               out.printf("%s", thisMonth);
+d97 1
+a97 5
+               read_year(args[1]);
+
+               year some_year = new year(calyear);
+
+               out.printf("%s", some_year);
+d100 1
+a100 6
+               read_month(args[1]);
+               read_year(args[2]);
+
+               month some_month = new month(calmonth, calyear);
+
+               out.printf("%s", some_month);
+d107 1
+a107 5
+               long now = System.currentTimeMillis();
+
+               month thisMonth = new month(intmonth(now) - 1, intyear(now));
+
+               out.printf("%s", thisMonth);
+d110 1
+a110 5
+               read_year(args[0]);
+
+               year some_year = new year(calyear);
+
+               out.printf("%s", some_year);
+d113 1
+a113 6
+               read_month(args[0]);
+               read_year(args[1]);
+
+               month some_month = new month(calmonth, calyear);
+
+               out.printf("%s", some_month);
+@
+
+
+1.2
+log
+@-
+@
+text
+@d1 2
+d62 27
+a88 15
+      if (args.length == 0) {
+         long now = System.currentTimeMillis();
+
+         month thisMonth = new month(intmonth(now) - 1, intyear(now));
+
+         out.printf("%s", thisMonth);
+
+      } else if (args.length == 1) {
+
+         read_year(args[0]);
+
+         year some_year = new year(calyear);
+
+         out.printf("%s", some_year);
+
+a89 4
+         read_month(args[0]);
+         read_year(args[1]);
+
+         month someMonth = new month(calmonth, calyear);
+d91 24
+a114 1
+         out.printf("%s", someMonth);
+@
+
+
+1.1
+log
+@-
+@
+text
+@d63 1
+a63 1
+         Month thisMonth = new Month(intmonth(now) - 1, intyear(now));
+d71 1
+a71 1
+         Year some_year = new Year(calyear);
+d79 1
+a79 1
+         Month someMonth = new Month(calmonth, calyear);
+@

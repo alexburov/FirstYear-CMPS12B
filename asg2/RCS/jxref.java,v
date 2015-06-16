@@ -1,0 +1,286 @@
+head	1.7;
+access;
+symbols;
+locks;
+comment	@# @;
+
+
+1.7
+date	2015.01.31.21.30.45;	author -;	state -;
+branches;
+next	1.6;
+
+1.6
+date	2015.01.31.21.29.53;	author -;	state -;
+branches;
+next	1.5;
+
+1.5
+date	2015.01.31.21.03.44;	author -;	state -;
+branches;
+next	1.4;
+
+1.4
+date	2015.01.29.00.00.31;	author -;	state -;
+branches;
+next	1.3;
+
+1.3
+date	2015.01.28.23.58.41;	author -;	state -;
+branches;
+next	1.2;
+
+1.2
+date	2015.01.28.22.27.46;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2015.01.27.07.37.43;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.7
+log
+@-
+@
+text
+@// $Id: jxref.java,v 1.6 2015-01-31 13:29:53-08 - - $
+// Author: Olexiy Burov, oburov@@ucsc.edu
+
+import java.io.*;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static java.lang.System.*;
+
+class jxref {
+   private static final String STDIN_FILENAME = "-";
+
+   // Regular expression for words
+   private static final String REGEX = "\\w+([-'.:/]\\w+)*";
+   private static final Pattern PATTERN = Pattern.compile(REGEX);
+
+   // Map of words.
+   private static listmap map;
+
+   // Adds all the words into the map.
+   private static void xref_file (Scanner file, String filename) {
+      map = new listmap();
+      for (int linenr = 1; file.hasNextLine(); ++linenr) {
+         String line = file.nextLine();
+         Matcher match = PATTERN.matcher (line);
+         while (match.find()) {
+            String word = match.group();
+            map.insert(word,linenr);
+         }
+      }
+
+      out.println("::::::::::::::::::::::::::::::::");
+      out.println(filename);
+      out.println("::::::::::::::::::::::::::::::::");
+
+      // Prints the map in the end.
+      print_map();
+   }
+   
+
+   // Prints the map.
+   private static void print_map() {
+      // For each entry in the map print word(key)
+      // and the number of times word appears in the file.
+      for (Entry<String, intqueue> entry : map) {
+         out.printf("%s [%d]", entry.getKey(),
+                               entry.getValue().getcount());
+         for (int line_number : entry.getValue()) {
+            // For each number in the queue print the number.
+            out.printf(" %d", line_number);
+         }
+         // After we are done with one entry in the map print newline.
+         out.printf("%n");
+      }
+   }
+
+   // For each filename, open the file, cross reference it,
+   // and print.
+   private static void xref_filename (String filename) {
+      if (filename.equals (STDIN_FILENAME)) {
+         xref_file (new Scanner (System.in), filename);
+      }else {
+         try {
+            Scanner file = new Scanner (new File (filename));
+            xref_file (file, filename);
+            file.close();
+         }catch (IOException error) {
+            misc.die (error.getMessage());
+         }
+      }
+   }
+
+   // Main function scans arguments to cross reference files.
+   public static void main (String[] args) {
+      if (args.length == 0) {
+         xref_filename (STDIN_FILENAME);
+      } else {
+         for (String filename: args) {
+            xref_filename (filename);
+         }
+      }
+      exit (misc.exit_status);
+   }
+
+}
+@
+
+
+1.6
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: jxref.java,v 1.5 2015-01-31 13:03:44-08 - - $
+d63 1
+a63 1
+         xref_file (new Scanner (System.in));
+@
+
+
+1.5
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: jxref.java,v 1.4 2015-01-28 16:00:31-08 - - $
+d23 1
+a23 1
+   private static void xref_file (Scanner file) {
+d34 4
+d67 1
+a67 1
+            xref_file (file);
+@
+
+
+1.4
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: jxref.java,v 1.3 2015-01-28 15:58:41-08 - - $
+d37 1
+d41 2
+a42 1
+
+d47 1
+d50 1
+@
+
+
+1.3
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: jxref.java,v 1.8 2013-10-16 17:10:32-07 - - $
+a48 28
+      /*
+      // Create iterator and iterate through map.
+      for (Iterator<Map.Entry<String,intqueue>> itr = map.iterator();
+           itr.hasNext(); ) {
+
+         // Variable to store current iterator.
+         Map.Entry<String,intqueue> current = itr.next();
+
+         // Print the actual word.
+         out.printf("%s ", current.getKey());
+
+         // Variable to store the queue of tha word.
+         intqueue current_queue = current.getValue();
+
+         // Print queues count(i.e how many time the word appeared)
+         out.printf("[%d]",current_queue.getcount());
+
+         // Create iterator for intqueue and iterate through it.
+         for (Iterator<Integer> queue_iterator =
+              current_queue.iterator(); queue_iterator.hasNext(); ) {
+
+            // Print the number in the queue.
+            out.printf(" %d", queue_iterator.next());
+         }
+         // Print newline character for the next iteration.
+         out.print('\n');
+      }
+      */
+d79 1
+a79 1
+}@
+
+
+1.2
+log
+@-
+@
+text
+@d6 1
+a6 1
+import java.util.Map;
+d40 10
+d76 1
+@
+
+
+1.1
+log
+@-
+@
+text
+@d2 1
+d14 2
+d18 2
+d22 2
+a23 1
+   private static void xref_file (String filename, Scanner file){
+d33 2
+d38 1
+d40 1
+d43 2
+d47 1
+d50 1
+d52 2
+d56 1
+d58 3
+a60 1
+                 current_queue.iterator(); queue_iterator.hasNext(); ) {
+d63 1
+d72 1
+a72 1
+         xref_file (filename, new Scanner (System.in));
+d76 1
+a76 1
+            xref_file (filename, file);
+d79 1
+a79 1
+            misc.die(error.getMessage());
+d88 1
+a88 1
+      }else {
+d96 1
+a96 2
+}
+
+@

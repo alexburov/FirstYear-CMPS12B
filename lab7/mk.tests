@@ -1,0 +1,19 @@
+#!/bin/sh
+# $Id: mk.tests,v 1.2 2013-05-01 13:26:20-07 - - $
+
+export PATH=$PATH:/afs/cats.ucsc.edu/courses/cmps012b-wm/bin
+
+function runtest {
+   test=$1
+   shift
+   echo $0: Running $test "$@"
+   "$@" 1>test.$test.out 2>test.$test.err
+   echo status = $? >test.$test.status
+   ls -goa test.$test.*
+}
+
+runtest test1 catqueue <data-1
+runtest test2 catqueue data-*
+runtest test3 catqueue foo bar baz /dev/null
+valgrind --leak-check=full catqueue data-aeneid >test4.out 2>test4.err
+

@@ -1,0 +1,65 @@
+$Id: SCORE,v 1.3 2013-05-06 17:03:59-07 - - $
+
+Grader:  copy this file into the student's submit directory.
+
+-----------------------------------------------------------------
+
+Run mk.build
+
+(3) Checksource did not complain.  If it did, deduct 1 point
+    (max 3) for each DIFFERENT kind of complaint.
+
+(3) merged getopt into program from example code
+
+(3) code to compare using strstr or strcasestr, depending on -i flag
+
+(3) code to print line numbers if -n flag
+
+(3) code to suppress output and only print filenames if -l flag
+
+source total=
+min 1, max 15
+
+-----------------------------------------------------------------
+
+Run mk.test
+
+For each of the three test runs, did the output look like
+the output from running jrpn in the code directory?
+Assign 0..4 points depending on how closely the output matched.
+Ignore minor differences in number formatting like a trailing
+0 or not.
+
+(2) the script mk worked and produced an executable.
+    otherwise compile by hand and run the tests.
+
+(2) test1 prints only filename
+
+(2) test2 prints lines but no filename
+
+(2) test3 prints filenames and lines
+
+(2) test4 prints filenames line numbers and lines
+
+(2) test5 matches Muse capitalized
+
+(3) All of the tests ran to completion and none of them
+    crashed with a segmentation fault message.  Deduct all
+    3 points for this item if any of the runs crashed.
+
+testing total=
+min 0, max 15
+
+-----------------------------------------------------------------
+
+add source total to testing total, giving:
+SUBTOTAL=
+min 1, max 30
+
+If pair programming, TOTALSCORE = SUBTOTAL - TOTAL2.
+If not, TOTALSCORE = SUBTOTAL.
+
+TOTALSCORE=
+min 1, max 30
+
+

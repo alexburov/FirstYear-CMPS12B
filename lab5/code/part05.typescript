@@ -1,0 +1,131 @@
+Script started on Mon 09 Feb 2015 09:37:49 PM PST
+[?1034hbash-4.1$ mk list1.c
+CSOURCE=environ.c EXECBIN=environ
++ cid + environ.c
++ checksource environ.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 environ.c -o environ -lm
++ tee environ.c.log
+environ.c: In function ‘main’:
+environ.c:6:14: warning: unused parameter ‘argc’ [-Wunused-parameter]
+ int main(int argc, char **argv)
+              ^
+environ.c:6:27: warning: unused parameter ‘argv’ [-Wunused-parameter]
+ int main(int argc, char **argv)
+                           ^
++ set +x
+============================================================
+CSOURCE=err2.c EXECBIN=err2
++ cid + err2.c
++ checksource err2.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 err2.c -o err2 -lm
++ tee err2.c.log
+err2.c: In function ‘main’:
+err2.c:6:14: warning: initialization makes pointer from integer without a cast [enabled by default]
+    char *p = 20;
+              ^
++ set +x
+============================================================
+CSOURCE=err.c EXECBIN=err
++ cid + err.c
++ checksource err.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 err.c -o err -lm
++ tee err.c.log
+err.c: In function ‘foo’:
+err.c:6:9: warning: unused variable ‘p’ [-Wunused-variable]
+    int *p = &x;
+         ^
+err.c: In function ‘bar’:
+err.c:11:11: warning: ‘a’ is used uninitialized in this function [-Wuninitialized]
+    printf ("%d %p\n", a, p);
+           ^
+err.c:11:11: warning: ‘p’ is used uninitialized in this function [-Wuninitialized]
++ set +x
+============================================================
+CSOURCE=list1.c EXECBIN=list1
++ cid + list1.c
++ checksource list1.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 list1.c -o list1 -lm
++ tee list1.c.log
+list1.c: In function ‘main’:
+list1.c:15:7: warning: implicit declaration of function ‘malloc’ [-Wimplicit-function-declaration]
+       node *node = malloc (sizeof (struct node));
+       ^
+list1.c:15:20: warning: incompatible implicit declaration of built-in function ‘malloc’ [enabled by default]
+       node *node = malloc (sizeof (struct node));
+                    ^
+list1.c:12:15: warning: unused parameter ‘argc’ [-Wunused-parameter]
+ int main (int argc, char **argv) {
+               ^
++ set +x
+============================================================
+CSOURCE=list2.c EXECBIN=list2
++ cid + list2.c
++ checksource list2.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 list2.c -o list2 -lm
++ tee list2.c.log
+list2.c: In function ‘main’:
+list2.c:13:15: warning: unused parameter ‘argc’ [-Wunused-parameter]
+ int main (int argc, char **argv) {
+               ^
++ set +x
+============================================================
+CSOURCE=list3.c EXECBIN=list3
++ cid + list3.c
++ checksource list3.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 list3.c -o list3 -lm
++ tee list3.c.log
+list3.c: In function ‘main’:
+list3.c:13:15: warning: unused parameter ‘argc’ [-Wunused-parameter]
+ int main (int argc, char **argv) {
+               ^
++ set +x
+============================================================
+CSOURCE=list4.c EXECBIN=list4
++ cid + list4.c
++ checksource list4.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 list4.c -o list4 -lm
++ tee list4.c.log
+list4.c: In function ‘main’:
+list4.c:20:15: warning: unused parameter ‘argc’ [-Wunused-parameter]
+ int main (int argc, char **argv) {
+               ^
++ set +x
+============================================================
+CSOURCE=malloc.c EXECBIN=malloc
++ cid + malloc.c
++ checksource malloc.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 malloc.c -o malloc -lm
++ tee malloc.c.log
+malloc.c: In function ‘main’:
+malloc.c:12:15: warning: unused parameter ‘argc’ [-Wunused-parameter]
+ int main (int argc, char **argv) {
+               ^
+malloc.c:12:28: warning: unused parameter ‘argv’ [-Wunused-parameter]
+ int main (int argc, char **argv) {
+                            ^
++ set +x
+============================================================
+CSOURCE=uninit.c EXECBIN=uninit
++ cid + uninit.c
++ checksource uninit.c
++ gcc -g -O0 -Wall -Wextra -std=gnu99 uninit.c -o uninit -lm
++ tee uninit.c.log
+uninit.c: In function ‘main’:
+uninit.c:6:15: warning: unused parameter ‘argc’ [-Wunused-parameter]
+ int main (int argc, char **argv) {
+               ^
+uninit.c:6:28: warning: unused parameter ‘argv’ [-Wunused-parameter]
+ int main (int argc, char **argv) {
+                            ^
+uninit.c:8:11: warning: ‘pointer’ is used uninitialized in this function [-Wuninitialized]
+    printf ("pointer=%p\n", pointer);
+           ^
+uninit.c:11:11: warning: ‘foo’ is used uninitialized in this function [-Wuninitialized]
+    printf ("foo=%d\n", foo);
+           ^
++ set +x
+============================================================
+bash-4.1$ exit
+exit
+
+Script done on Mon 09 Feb 2015 09:38:09 PM PST

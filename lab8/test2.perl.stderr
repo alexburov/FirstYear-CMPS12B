@@ -1,0 +1,2 @@
+mstat.perl: /foo/bar/baz: No such file or directory
+mstat.perl: /no/such: No such file or directory

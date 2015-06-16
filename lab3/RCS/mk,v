@@ -1,0 +1,43 @@
+head	1.2;
+access;
+symbols;
+locks;
+comment	@# @;
+
+
+1.2
+date	2015.01.28.19.41.03;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2015.01.28.19.40.35;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@-
+@
+text
+@#!/bin/sh
+# $Id: mk,v 1.1 2015-01-28 11:40:35-08 - - $
+# Author: Olexiy Burov, oburov@@ucsc.edu
+gcc -g -O0 -Wall -Wextra -std=gnu11 crpn.c -o crpn
+@
+
+
+1.1
+log
+@-
+@
+text
+@d2 2
+a3 1
+# $Id$
+@

@@ -1,0 +1,1254 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 38 24 574 768
+%%Title: Listing.ps
+%%For: Wesley Mackey
+%%Creator: GNU enscript 1.6.4
+%%CreationDate: Wed Apr 30 17:37:26 2014
+%%Orientation: Portrait
+%%Pages: (atend)
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset Enscript-Prolog 1.6 4
+%
+% Procedures.
+%
+
+/_S {	% save current state
+  /_s save def
+} def
+/_R {	% restore from saved state
+  _s restore
+} def
+
+/S {	% showpage protecting gstate
+  gsave
+  showpage
+  grestore
+} bind def
+
+/MF {	% fontname newfontname -> -	make a new encoded font
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  % insert only valid encoding vectors
+  encoding_vector length 256 eq {
+    newfont /Encoding encoding_vector put
+  } if
+
+  newfontname newfont definefont pop
+} def
+
+/MF_PS { % fontname newfontname -> -	make a new font preserving its enc
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  newfontname newfont definefont pop
+} def
+
+/SF { % fontname width height -> -	set a new font
+  /height exch def
+  /width exch def
+
+  findfont
+  [width 0 0 height 0 0] makefont setfont
+} def
+
+/SUF { % fontname width height -> -	set a new user font
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF
+  /F-gs-user-font width height SF
+} def
+
+/SUF_PS { % fontname width height -> -	set a new user font preserving its enc
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF_PS
+  /F-gs-user-font width height SF
+} def
+
+/M {moveto} bind def
+/s {show} bind def
+
+/Box {	% x y w h -> -			define box path
+  /d_h exch def /d_w exch def /d_y exch def /d_x exch def
+  d_x d_y  moveto
+  d_w 0 rlineto
+  0 d_h rlineto
+  d_w neg 0 rlineto
+  closepath
+} def
+
+/bgs {	% x y height blskip gray str -> -	show string with bg color
+  /str exch def
+  /gray exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    gray setgray
+    fill
+  grestore
+  x y M str s
+} def
+
+/bgcs { % x y height blskip red green blue str -> -  show string with bg color
+  /str exch def
+  /blue exch def
+  /green exch def
+  /red exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    red green blue setrgbcolor
+    fill
+  grestore
+  x y M str s
+} def
+
+% Highlight bars.
+/highlight_bars {	% nlines lineheight output_y_margin gray -> -
+  gsave
+    setgray
+    /ymarg exch def
+    /lineheight exch def
+    /nlines exch def
+
+    % This 2 is just a magic number to sync highlight lines to text.
+    0 d_header_y ymarg sub 2 sub translate
+
+    /cw d_output_w cols div def
+    /nrows d_output_h ymarg 2 mul sub lineheight div cvi def
+
+    % for each column
+    0 1 cols 1 sub {
+      cw mul /xp exch def
+
+      % for each rows
+      0 1 nrows 1 sub {
+        /rn exch def
+        rn lineheight mul neg /yp exch def
+        rn nlines idiv 2 mod 0 eq {
+	  % Draw highlight bar.  4 is just a magic indentation.
+	  xp 4 add yp cw 8 sub lineheight neg Box fill
+	} if
+      } for
+    } for
+
+  grestore
+} def
+
+% Line highlight bar.
+/line_highlight {	% x y width height gray -> -
+  gsave
+    /gray exch def
+    Box gray setgray fill
+  grestore
+} def
+
+% Column separator lines.
+/column_lines {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h translate
+    /cw d_output_w cols div def
+    1 1 cols 1 sub {
+      cw mul 0 moveto
+      0 d_output_h rlineto stroke
+    } for
+  grestore
+} def
+
+% Column borders.
+/column_borders {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h moveto
+    0 d_output_h rlineto
+    d_output_w 0 rlineto
+    0 d_output_h neg rlineto
+    closepath stroke
+  grestore
+} def
+
+% Do the actual underlay drawing
+/draw_underlay {
+  ul_style 0 eq {
+    ul_str true charpath stroke
+  } {
+    ul_str show
+  } ifelse
+} def
+
+% Underlay
+/underlay {	% - -> -
+  gsave
+    0 d_page_h translate
+    d_page_h neg d_page_w atan rotate
+
+    ul_gray setgray
+    ul_font setfont
+    /dw d_page_h dup mul d_page_w dup mul add sqrt def
+    ul_str stringwidth pop dw exch sub 2 div ul_h_ptsize -2 div moveto
+    draw_underlay
+  grestore
+} def
+
+/user_underlay {	% - -> -
+  gsave
+    ul_x ul_y translate
+    ul_angle rotate
+    ul_gray setgray
+    ul_font setfont
+    0 0 ul_h_ptsize 2 div sub moveto
+    draw_underlay
+  grestore
+} def
+
+% Page prefeed
+/page_prefeed {		% bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} def
+
+% Wrapped line markers
+/wrapped_line_mark {	% x y charwith charheight type -> -
+  /type exch def
+  /h exch def
+  /w exch def
+  /y exch def
+  /x exch def
+
+  type 2 eq {
+    % Black boxes (like TeX does)
+    gsave
+      0 setlinewidth
+      x w 4 div add y M
+      0 h rlineto w 2 div 0 rlineto 0 h neg rlineto
+      closepath fill
+    grestore
+  } {
+    type 3 eq {
+      % Small arrows
+      gsave
+        .2 setlinewidth
+        x w 2 div add y h 2 div add M
+        w 4 div 0 rlineto
+        x w 4 div add y lineto stroke
+
+        x w 4 div add w 8 div add y h 4 div add M
+        x w 4 div add y lineto
+	w 4 div h 8 div rlineto stroke
+      grestore
+    } {
+      % do nothing
+    } ifelse
+  } ifelse
+} def
+
+% EPSF import.
+
+/BeginEPSF {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack
+  userdict begin
+  /showpage { } def
+  0 setgray 0 setlinecap
+  1 setlinewidth 0 setlinejoin
+  10 setmiterlimit [ ] 0 setdash newpath
+  /languagelevel where {
+    pop languagelevel
+    1 ne {
+      false setstrokeadjust false setoverprint
+    } if
+  } if
+} bind def
+
+/EndEPSF {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+%%EndResource
+%%BeginResource: procset Enscript-Encoding-88591 1.6 4
+/encoding_vector [
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclam       	/quotedbl     	/numbersign   	
+/dollar       	/percent      	/ampersand    	/quoteright   	
+/parenleft    	/parenright   	/asterisk     	/plus         	
+/comma        	/hyphen       	/period       	/slash        	
+/zero         	/one          	/two          	/three        	
+/four         	/five         	/six          	/seven        	
+/eight        	/nine         	/colon        	/semicolon    	
+/less         	/equal        	/greater      	/question     	
+/at           	/A            	/B            	/C            	
+/D            	/E            	/F            	/G            	
+/H            	/I            	/J            	/K            	
+/L            	/M            	/N            	/O            	
+/P            	/Q            	/R            	/S            	
+/T            	/U            	/V            	/W            	
+/X            	/Y            	/Z            	/bracketleft  	
+/backslash    	/bracketright 	/asciicircum  	/underscore   	
+/quoteleft    	/a            	/b            	/c            	
+/d            	/e            	/f            	/g            	
+/h            	/i            	/j            	/k            	
+/l            	/m            	/n            	/o            	
+/p            	/q            	/r            	/s            	
+/t            	/u            	/v            	/w            	
+/x            	/y            	/z            	/braceleft    	
+/bar          	/braceright   	/tilde        	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclamdown   	/cent         	/sterling     	
+/currency     	/yen          	/brokenbar    	/section      	
+/dieresis     	/copyright    	/ordfeminine  	/guillemotleft	
+/logicalnot   	/hyphen       	/registered   	/macron       	
+/degree       	/plusminus    	/twosuperior  	/threesuperior	
+/acute        	/mu           	/paragraph    	/bullet       	
+/cedilla      	/onesuperior  	/ordmasculine 	/guillemotright	
+/onequarter   	/onehalf      	/threequarters	/questiondown 	
+/Agrave       	/Aacute       	/Acircumflex  	/Atilde       	
+/Adieresis    	/Aring        	/AE           	/Ccedilla     	
+/Egrave       	/Eacute       	/Ecircumflex  	/Edieresis    	
+/Igrave       	/Iacute       	/Icircumflex  	/Idieresis    	
+/Eth          	/Ntilde       	/Ograve       	/Oacute       	
+/Ocircumflex  	/Otilde       	/Odieresis    	/multiply     	
+/Oslash       	/Ugrave       	/Uacute       	/Ucircumflex  	
+/Udieresis    	/Yacute       	/Thorn        	/germandbls   	
+/agrave       	/aacute       	/acircumflex  	/atilde       	
+/adieresis    	/aring        	/ae           	/ccedilla     	
+/egrave       	/eacute       	/ecircumflex  	/edieresis    	
+/igrave       	/iacute       	/icircumflex  	/idieresis    	
+/eth          	/ntilde       	/ograve       	/oacute       	
+/ocircumflex  	/otilde       	/odieresis    	/divide       	
+/oslash       	/ugrave       	/uacute       	/ucircumflex  	
+/udieresis    	/yacute       	/thorn        	/ydieresis    	
+] def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier-Bold
+/HFpt_w 10 def
+/HFpt_h 10 def
+/Courier-Bold /HF-gs-font MF
+/HF /HF-gs-font findfont [HFpt_w 0 0 HFpt_h 0 0] makefont def
+/Courier-Bold /F-gs-font MF
+/F-gs-font 11 11 SF
+/#copies 1 def
+% Pagedevice definitions:
+gs_languagelevel 1 gt {
+  <<
+    /PageSize [612 792] 
+  >> setpagedevice
+} if
+%%BeginResource: procset Enscript-Header-enscript-mycolor 1.6 4
+%%IncludeResource: font Times-Bold
+%%IncludeResource: font Times-Roman
+
+% Fonts.
+/Times-Bold /HeaderFont-Bold MF
+/HeaderDateF /HeaderFont-Bold findfont 12 scalefont def
+
+/Times-Roman /HeaderFont-Times MF
+/HeaderHDRF /HeaderFont-Times findfont 14 scalefont def
+
+/HeaderPageNumF /Helvetica-Bold findfont 28.8 scalefont def
+/HeaderPageCountF /Helvetica-Bold findfont 18 scalefont def
+
+/do_header {	% print enscript header
+  gsave
+    d_header_x d_header_y translate
+
+    /dhw d_header_w 4 sub def
+
+    /linecolor {0 0 0 setrgbcolor} bind def  % line color
+    /txcolor   {0 0 0 setrgbcolor} bind def  % text color
+    /fncolor   {0 0 0 setrgbcolor} bind def  % filename line color
+
+    .5 setlinewidth
+
+    % line across bottom of the header area
+    linecolor
+    0 0 moveto dhw 0 lineto
+
+    % side boxes
+    /sbw d_header_h 2 mul def	% side box width
+
+    % left side box
+    0 0 sbw d_header_h Box
+    linecolor
+    stroke
+
+    % date/time in left box
+    txcolor
+    HeaderDateF setfont
+    moddatestr dup stringwidth pop sbw exch sub 2 div
+    d_header_h 2 div 2 add moveto show
+    modtimestr dup stringwidth pop sbw exch sub 2 div
+    d_header_h 5 div moveto show
+
+    % right side box
+    dhw sbw sub 0 sbw d_header_h Box
+    linecolor
+    stroke
+
+    % get width of pagecount
+    HeaderPageCountF setfont
+    pagecountstr stringwidth pop
+
+    txcolor
+    HeaderPageNumF setfont
+    pagenumstr stringwidth pop add  % add to width of pagecount
+    sbw exch sub 2 div dhw sbw sub add
+    d_header_h .2 mul moveto
+
+    pagenumstr show
+
+    HeaderPageCountF setfont
+    pagecountstr show
+
+    % filename
+    fncolor
+    HeaderHDRF setfont
+    dhw fname stringwidth pop sub 2 div d_header_h 8 div moveto
+    fname show
+
+    % user supplied header string.
+    user_header_p {
+      /h d_header_h 8 div 5 mul def
+
+      % HACK around a bug in enscript 1.6.0:
+      % for some reason this is getting set to "(null)" and
+      %
+      user_header_center_str (\(null\)) eq {
+        /user_header_center_str () def
+      } if
+
+      % Implement strict enscript compatibility.
+      user_header_center_str () eq user_header_right_str () eq and {
+        dhw user_header_left_str stringwidth pop sub 2 div
+        h moveto user_header_left_str show
+      } {
+        sbw 5 add h moveto user_header_left_str show
+
+        dhw user_header_center_str stringwidth pop sub 2 div
+        h moveto user_header_center_str show
+
+	dhw sbw sub 5 sub user_header_right_str stringwidth pop
+	sub h moveto user_header_right_str show
+      } ifelse
+    } if
+
+  grestore
+} bind def
+%%EndResource
+/d_page_w 536 def
+/d_page_h 744 def
+/d_header_x 0 def
+/d_header_y 708 def
+/d_header_w 536 def
+/d_header_h 36 def
+/d_footer_x 0 def
+/d_footer_y 0 def
+/d_footer_w 536 def
+/d_footer_h 0 def
+/d_output_w 536 def
+/d_output_h 708 def
+/cols 1 def
+%%EndSetup
+%%Page: (1) 1
+%%BeginPageSetup
+_S
+38 24 translate
+/pagenum 1 def
+/fname (mk) def
+/fdir () def
+/ftail (mk) def
+% User defined strings:
+/pagenumstr (1) def
+/moddatestr (04/30/14) def
+/pagecountstr (/1) def
+/modtimestr (17:37:19) def
+/user_header_p true def
+/user_header_left_str ($cmps012b-wm/Labs-cmps012m/lab5c-gdb-valgrind/code/) def
+/user_header_center_str () def
+/user_header_right_str () def
+/user_footer_p false def
+%%EndPageSetup
+column_borders
+do_header
+32.4 694 M (1:) s
+52.2 694 M
+(#!/bin/sh) s
+32.4 682 M (2:) s
+52.2 682 M
+(# $Id: mk,v 1.9 2014-04-30 17:37:19-07 - - $) s
+32.4 670 M (3:) s
+52.2 670 M
+(#) s
+32.4 658 M (4:) s
+52.2 658 M
+(# This script takes the names of C source files and compiles them) s
+32.4 646 M (5:) s
+52.2 646 M
+(# into executable images.  Each source must be a complete program.) s
+32.4 634 M (6:) s
+52.2 634 M
+(#) s
+32.4 622 M (7:) s
+32.4 610 M (8:) s
+52.2 610 M
+(export PATH=$PATH:/afs/cats.ucsc.edu/courses/cmps012b-wm/bin) s
+32.4 598 M (9:) s
+52.2 598 M
+(GCC='gcc -g -O0 -Wall -Wextra -std=gnu99') s
+25.8 586 M (10:) s
+25.8 574 M (11:) s
+52.2 574 M
+(for CSOURCE in *.c) s
+25.8 562 M (12:) s
+52.2 562 M
+(do) s
+25.8 550 M (13:) s
+52.2 550 M
+(   EXECBIN=${CSOURCE%.c}) s
+25.8 538 M (14:) s
+52.2 538 M
+(   if [ "$CSOURCE" == "$EXECBIN" ]) s
+25.8 526 M (15:) s
+52.2 526 M
+(   then) s
+25.8 514 M (16:) s
+52.2 514 M
+(      echo $0: $CSOURCE: is not a C source file) s
+25.8 502 M (17:) s
+52.2 502 M
+(   else) s
+25.8 490 M (18:) s
+52.2 490 M
+(      echo CSOURCE=$CSOURCE EXECBIN=$EXECBIN) s
+25.8 478 M (19:) s
+52.2 478 M
+(      set -x) s
+25.8 466 M (20:) s
+52.2 466 M
+(      cid + $CSOURCE) s
+25.8 454 M (21:) s
+52.2 454 M
+(      checksource $CSOURCE) s
+25.8 442 M (22:) s
+52.2 442 M
+(      $GCC $CSOURCE -o $EXECBIN -lm 2>&1 | tee $CSOURCE.log 2>&1) s
+25.8 430 M (23:) s
+52.2 430 M
+(      set +x) s
+25.8 418 M (24:) s
+52.2 418 M
+(      echo ============================================================) s
+25.8 406 M (25:) s
+52.2 406 M
+(   fi) s
+25.8 394 M (26:) s
+52.2 394 M
+(done) s
+25.8 382 M (27:) s
+_R
+S
+%%Page: (1) 2
+%%BeginPageSetup
+_S
+38 24 translate
+/pagenum 1 def
+/fname (mkps) def
+/fdir () def
+/ftail (mkps) def
+% User defined strings:
+/pagenumstr (1) def
+/moddatestr (04/30/14) def
+/pagecountstr (/1) def
+/modtimestr (17:37:25) def
+/user_header_p true def
+/user_header_left_str ($cmps012b-wm/Labs-cmps012m/lab5c-gdb-valgrind/code/) def
+/user_header_center_str () def
+/user_header_right_str () def
+/user_footer_p false def
+%%EndPageSetup
+column_borders
+do_header
+32.4 694 M (1:) s
+52.2 694 M
+(#!/bin/sh) s
+32.4 682 M (2:) s
+52.2 682 M
+(# $Id: mkps,v 1.1 2014-04-30 17:37:19-07 - - $) s
+32.4 670 M (3:) s
+52.2 670 M
+(mk *.c) s
+32.4 658 M (4:) s
+52.2 658 M
+(for file in *.c) s
+32.4 646 M (5:) s
+52.2 646 M
+(do) s
+32.4 634 M (6:) s
+52.2 634 M
+(   more $file $file.log >$file.lis </dev/null) s
+32.4 622 M (7:) s
+52.2 622 M
+(done) s
+32.4 610 M (8:) s
+52.2 610 M
+(mkpspdf Listing.ps mk* *.lis) s
+_R
+S
+%%Page: (1) 3
+%%BeginPageSetup
+_S
+38 24 translate
+/pagenum 1 def
+/fname (err.c.lis) def
+/fdir () def
+/ftail (err.c.lis) def
+% User defined strings:
+/pagenumstr (1) def
+/moddatestr (04/30/14) def
+/pagecountstr (/1) def
+/modtimestr (17:37:26) def
+/user_header_p true def
+/user_header_left_str ($cmps012b-wm/Labs-cmps012m/lab5c-gdb-valgrind/code/) def
+/user_header_center_str () def
+/user_header_right_str () def
+/user_footer_p false def
+%%EndPageSetup
+column_borders
+do_header
+32.4 694 M (1:) s
+52.2 694 M
+(::::::::::::::) s
+32.4 682 M (2:) s
+52.2 682 M
+(err.c) s
+32.4 670 M (3:) s
+52.2 670 M
+(::::::::::::::) s
+32.4 658 M (4:) s
+52.2 658 M
+(// $Id: err.c,v 1.5 2014-04-23 21:19:13-07 - - $) s
+32.4 646 M (5:) s
+32.4 634 M (6:) s
+52.2 634 M
+(#include <stdio.h>) s
+32.4 622 M (7:) s
+52.2 622 M
+(void foo\(\) {) s
+32.4 610 M (8:) s
+52.2 610 M
+(   int x = 20;) s
+32.4 598 M (9:) s
+52.2 598 M
+(   int *p = &x;) s
+25.8 586 M (10:) s
+52.2 586 M
+(}) s
+25.8 574 M (11:) s
+52.2 574 M
+(void bar\(\) {) s
+25.8 562 M (12:) s
+52.2 562 M
+(   int a;) s
+25.8 550 M (13:) s
+52.2 550 M
+(   int *p;) s
+25.8 538 M (14:) s
+52.2 538 M
+(   printf \("%d %p\\n", a, p\);) s
+25.8 526 M (15:) s
+52.2 526 M
+(}) s
+25.8 514 M (16:) s
+52.2 514 M
+(int main\(\) {) s
+25.8 502 M (17:) s
+52.2 502 M
+(   foo\(\);) s
+25.8 490 M (18:) s
+52.2 490 M
+(   bar\(\);) s
+25.8 478 M (19:) s
+52.2 478 M
+(}) s
+25.8 466 M (20:) s
+52.2 466 M
+(::::::::::::::) s
+25.8 454 M (21:) s
+52.2 454 M
+(err.c.log) s
+25.8 442 M (22:) s
+52.2 442 M
+(::::::::::::::) s
+25.8 430 M (23:) s
+52.2 430 M
+(err.c: In function 'foo':) s
+25.8 418 M (24:) s
+52.2 418 M
+(err.c:6:9: warning: unused variable 'p' [-Wunused-variable]) s
+25.8 406 M (25:) s
+52.2 406 M
+(    int *p = &x;) s
+25.8 394 M (26:) s
+52.2 394 M
+(         ^) s
+25.8 382 M (27:) s
+52.2 382 M
+(err.c: In function 'bar':) s
+25.8 370 M (28:) s
+52.2 370 M
+(err.c:11:11: warning: 'a' is used uninitialized in this function [-Wunin) s
+5 358 M
+(itialized]) s
+25.8 346 M (29:) s
+52.2 346 M
+(    printf \("%d %p\\n", a, p\);) s
+25.8 334 M (30:) s
+52.2 334 M
+(           ^) s
+25.8 322 M (31:) s
+52.2 322 M
+(err.c:11:11: warning: 'p' is used uninitialized in this function [-Wunin) s
+5 310 M
+(itialized]) s
+_R
+S
+%%Page: (1) 4
+%%BeginPageSetup
+_S
+38 24 translate
+/pagenum 1 def
+/fname (err2.c.lis) def
+/fdir () def
+/ftail (err2.c.lis) def
+% User defined strings:
+/pagenumstr (1) def
+/moddatestr (04/30/14) def
+/pagecountstr (/1) def
+/modtimestr (17:37:26) def
+/user_header_p true def
+/user_header_left_str ($cmps012b-wm/Labs-cmps012m/lab5c-gdb-valgrind/code/) def
+/user_header_center_str () def
+/user_header_right_str () def
+/user_footer_p false def
+%%EndPageSetup
+column_borders
+do_header
+32.4 694 M (1:) s
+52.2 694 M
+(::::::::::::::) s
+32.4 682 M (2:) s
+52.2 682 M
+(err2.c) s
+32.4 670 M (3:) s
+52.2 670 M
+(::::::::::::::) s
+32.4 658 M (4:) s
+52.2 658 M
+(// $Id: err2.c,v 1.5 2014-04-23 21:19:13-07 - - $) s
+32.4 646 M (5:) s
+32.4 634 M (6:) s
+52.2 634 M
+(#include <stdio.h>) s
+32.4 622 M (7:) s
+52.2 622 M
+(#include <string.h>) s
+32.4 610 M (8:) s
+52.2 610 M
+(int main \(void\) {) s
+32.4 598 M (9:) s
+52.2 598 M
+(   char *p = 20;) s
+25.8 586 M (10:) s
+52.2 586 M
+(   int c = strcmp \(p, "foo"\);) s
+25.8 574 M (11:) s
+52.2 574 M
+(   printf \("%d\\n", c\);) s
+25.8 562 M (12:) s
+52.2 562 M
+(   return 0;) s
+25.8 550 M (13:) s
+52.2 550 M
+(}) s
+25.8 538 M (14:) s
+52.2 538 M
+(::::::::::::::) s
+25.8 526 M (15:) s
+52.2 526 M
+(err2.c.log) s
+25.8 514 M (16:) s
+52.2 514 M
+(::::::::::::::) s
+25.8 502 M (17:) s
+52.2 502 M
+(err2.c: In function 'main':) s
+25.8 490 M (18:) s
+52.2 490 M
+(err2.c:6:14: warning: initialization makes pointer from integer without ) s
+5 478 M
+(a cast [enabled by default]) s
+25.8 466 M (19:) s
+52.2 466 M
+(    char *p = 20;) s
+25.8 454 M (20:) s
+52.2 454 M
+(              ^) s
+_R
+S
+%%Page: (1) 5
+%%BeginPageSetup
+_S
+38 24 translate
+/pagenum 1 def
+/fname (list1.c.lis) def
+/fdir () def
+/ftail (list1.c.lis) def
+% User defined strings:
+/pagenumstr (1) def
+/moddatestr (04/30/14) def
+/pagecountstr (/1) def
+/modtimestr (17:37:26) def
+/user_header_p true def
+/user_header_left_str ($cmps012b-wm/Labs-cmps012m/lab5c-gdb-valgrind/code/) def
+/user_header_center_str () def
+/user_header_right_str () def
+/user_footer_p false def
+%%EndPageSetup
+column_borders
+do_header
+32.4 694 M (1:) s
+52.2 694 M
+(::::::::::::::) s
+32.4 682 M (2:) s
+52.2 682 M
+(list1.c) s
+32.4 670 M (3:) s
+52.2 670 M
+(::::::::::::::) s
+32.4 658 M (4:) s
+52.2 658 M
+(// $Id: list1.c,v 1.3 2013-02-08 18:00:41-08 - - $) s
+32.4 646 M (5:) s
+32.4 634 M (6:) s
+52.2 634 M
+(#include <assert.h>) s
+32.4 622 M (7:) s
+52.2 622 M
+(#include <stdio.h>) s
+32.4 610 M (8:) s
+32.4 598 M (9:) s
+52.2 598 M
+(typedef struct node node;) s
+25.8 586 M (10:) s
+52.2 586 M
+(struct node {) s
+25.8 574 M (11:) s
+52.2 574 M
+(   char *word;) s
+25.8 562 M (12:) s
+52.2 562 M
+(   node *link;) s
+25.8 550 M (13:) s
+52.2 550 M
+(};) s
+25.8 538 M (14:) s
+25.8 526 M (15:) s
+52.2 526 M
+(int main \(int argc, char **argv\) {) s
+25.8 514 M (16:) s
+52.2 514 M
+(   node *head;) s
+25.8 502 M (17:) s
+52.2 502 M
+(   for \(int argi = 0; argi < 5; ++argi\) {) s
+25.8 490 M (18:) s
+52.2 490 M
+(      node *node = malloc \(sizeof \(struct node\)\);) s
+25.8 478 M (19:) s
+52.2 478 M
+(      assert \(node != NULL\);) s
+25.8 466 M (20:) s
+52.2 466 M
+(      node->word = argv[argi];) s
+25.8 454 M (21:) s
+52.2 454 M
+(      node->link = head;) s
+25.8 442 M (22:) s
+52.2 442 M
+(      head = node;) s
+25.8 430 M (23:) s
+52.2 430 M
+(   }) s
+25.8 418 M (24:) s
+52.2 418 M
+(   for \(node *curr = head; curr->link != NULL; curr = curr->link\) {) s
+25.8 406 M (25:) s
+52.2 406 M
+(      printf \("%p->node {word=%p->[%s], link=%p}\\n",) s
+25.8 394 M (26:) s
+52.2 394 M
+(              curr, curr->word, curr->word, curr->link\);) s
+25.8 382 M (27:) s
+52.2 382 M
+(   }) s
+25.8 370 M (28:) s
+52.2 370 M
+(   return 9;) s
+25.8 358 M (29:) s
+52.2 358 M
+(}) s
+25.8 346 M (30:) s
+52.2 346 M
+(::::::::::::::) s
+25.8 334 M (31:) s
+52.2 334 M
+(list1.c.log) s
+25.8 322 M (32:) s
+52.2 322 M
+(::::::::::::::) s
+25.8 310 M (33:) s
+52.2 310 M
+(list1.c: In function 'main':) s
+25.8 298 M (34:) s
+52.2 298 M
+(list1.c:15:7: warning: implicit declaration of function 'malloc' [-Wimpl) s
+5 286 M
+(icit-function-declaration]) s
+25.8 274 M (35:) s
+52.2 274 M
+(       node *node = malloc \(sizeof \(struct node\)\);) s
+25.8 262 M (36:) s
+52.2 262 M
+(       ^) s
+25.8 250 M (37:) s
+52.2 250 M
+(list1.c:15:20: warning: incompatible implicit declaration of built-in fu) s
+5 238 M
+(nction 'malloc' [enabled by default]) s
+25.8 226 M (38:) s
+52.2 226 M
+(       node *node = malloc \(sizeof \(struct node\)\);) s
+25.8 214 M (39:) s
+52.2 214 M
+(                    ^) s
+25.8 202 M (40:) s
+52.2 202 M
+(list1.c:12:15: warning: unused parameter 'argc' [-Wunused-parameter]) s
+25.8 190 M (41:) s
+52.2 190 M
+( int main \(int argc, char **argv\) {) s
+25.8 178 M (42:) s
+52.2 178 M
+(               ^) s
+_R
+S
+%%Page: (1) 6
+%%BeginPageSetup
+_S
+38 24 translate
+/pagenum 1 def
+/fname (malloc.c.lis) def
+/fdir () def
+/ftail (malloc.c.lis) def
+% User defined strings:
+/pagenumstr (1) def
+/moddatestr (04/30/14) def
+/pagecountstr (/1) def
+/modtimestr (17:37:26) def
+/user_header_p true def
+/user_header_left_str ($cmps012b-wm/Labs-cmps012m/lab5c-gdb-valgrind/code/) def
+/user_header_center_str () def
+/user_header_right_str () def
+/user_footer_p false def
+%%EndPageSetup
+column_borders
+do_header
+32.4 694 M (1:) s
+52.2 694 M
+(::::::::::::::) s
+32.4 682 M (2:) s
+52.2 682 M
+(malloc.c) s
+32.4 670 M (3:) s
+52.2 670 M
+(::::::::::::::) s
+32.4 658 M (4:) s
+52.2 658 M
+(// $Id: malloc.c,v 1.2 2013-02-08 18:01:12-08 - - $) s
+32.4 646 M (5:) s
+32.4 634 M (6:) s
+52.2 634 M
+(#include <stdio.h>) s
+32.4 622 M (7:) s
+52.2 622 M
+(#include <stdlib.h>) s
+32.4 610 M (8:) s
+32.4 598 M (9:) s
+52.2 598 M
+(typedef struct node node;) s
+25.8 586 M (10:) s
+52.2 586 M
+(struct node {) s
+25.8 574 M (11:) s
+52.2 574 M
+(   int value;) s
+25.8 562 M (12:) s
+52.2 562 M
+(   node *link;) s
+25.8 550 M (13:) s
+52.2 550 M
+(};) s
+25.8 538 M (14:) s
+25.8 526 M (15:) s
+52.2 526 M
+(int main \(int argc, char **argv\) {) s
+25.8 514 M (16:) s
+52.2 514 M
+(   node *ptr = malloc \(sizeof \(struct node\)\);) s
+25.8 502 M (17:) s
+52.2 502 M
+(   ptr = malloc \(sizeof \(node\)\);) s
+25.8 490 M (18:) s
+52.2 490 M
+(   ptr->value = 6;) s
+25.8 478 M (19:) s
+52.2 478 M
+(   ptr->link = NULL;) s
+25.8 466 M (20:) s
+52.2 466 M
+(   printf \("%p-> {%d, %p}\\n", ptr, ptr->value, ptr->link\);) s
+25.8 454 M (21:) s
+52.2 454 M
+(   free \(ptr\);) s
+25.8 442 M (22:) s
+52.2 442 M
+(   return EXIT_SUCCESS;) s
+25.8 430 M (23:) s
+52.2 430 M
+(}) s
+25.8 418 M (24:) s
+52.2 418 M
+(::::::::::::::) s
+25.8 406 M (25:) s
+52.2 406 M
+(malloc.c.log) s
+25.8 394 M (26:) s
+52.2 394 M
+(::::::::::::::) s
+25.8 382 M (27:) s
+52.2 382 M
+(malloc.c: In function 'main':) s
+25.8 370 M (28:) s
+52.2 370 M
+(malloc.c:12:15: warning: unused parameter 'argc' [-Wunused-parameter]) s
+25.8 358 M (29:) s
+52.2 358 M
+( int main \(int argc, char **argv\) {) s
+25.8 346 M (30:) s
+52.2 346 M
+(               ^) s
+25.8 334 M (31:) s
+52.2 334 M
+(malloc.c:12:28: warning: unused parameter 'argv' [-Wunused-parameter]) s
+25.8 322 M (32:) s
+52.2 322 M
+( int main \(int argc, char **argv\) {) s
+25.8 310 M (33:) s
+52.2 310 M
+(                            ^) s
+_R
+S
+%%Page: (1) 7
+%%BeginPageSetup
+_S
+38 24 translate
+/pagenum 1 def
+/fname (uninit.c.lis) def
+/fdir () def
+/ftail (uninit.c.lis) def
+% User defined strings:
+/pagenumstr (1) def
+/moddatestr (04/30/14) def
+/pagecountstr (/1) def
+/modtimestr (17:37:26) def
+/user_header_p true def
+/user_header_left_str ($cmps012b-wm/Labs-cmps012m/lab5c-gdb-valgrind/code/) def
+/user_header_center_str () def
+/user_header_right_str () def
+/user_footer_p false def
+%%EndPageSetup
+column_borders
+do_header
+32.4 694 M (1:) s
+52.2 694 M
+(::::::::::::::) s
+32.4 682 M (2:) s
+52.2 682 M
+(uninit.c) s
+32.4 670 M (3:) s
+52.2 670 M
+(::::::::::::::) s
+32.4 658 M (4:) s
+52.2 658 M
+(// $Id: uninit.c,v 1.3 2014-02-18 15:08:14-08 - - $) s
+32.4 646 M (5:) s
+32.4 634 M (6:) s
+52.2 634 M
+(#include <stdio.h>) s
+32.4 622 M (7:) s
+52.2 622 M
+(#include <stdlib.h>) s
+32.4 610 M (8:) s
+32.4 598 M (9:) s
+52.2 598 M
+(int main \(int argc, char **argv\) {) s
+25.8 586 M (10:) s
+52.2 586 M
+(   int *pointer;) s
+25.8 574 M (11:) s
+52.2 574 M
+(   printf \("pointer=%p\\n", pointer\);) s
+25.8 562 M (12:) s
+52.2 562 M
+(   printf \("*pointer=%d\\n", *pointer\);) s
+25.8 550 M (13:) s
+52.2 550 M
+(   int foo;) s
+25.8 538 M (14:) s
+52.2 538 M
+(   printf \("foo=%d\\n", foo\);) s
+25.8 526 M (15:) s
+52.2 526 M
+(}) s
+25.8 514 M (16:) s
+52.2 514 M
+(::::::::::::::) s
+25.8 502 M (17:) s
+52.2 502 M
+(uninit.c.log) s
+25.8 490 M (18:) s
+52.2 490 M
+(::::::::::::::) s
+25.8 478 M (19:) s
+52.2 478 M
+(uninit.c: In function 'main':) s
+25.8 466 M (20:) s
+52.2 466 M
+(uninit.c:6:15: warning: unused parameter 'argc' [-Wunused-parameter]) s
+25.8 454 M (21:) s
+52.2 454 M
+( int main \(int argc, char **argv\) {) s
+25.8 442 M (22:) s
+52.2 442 M
+(               ^) s
+25.8 430 M (23:) s
+52.2 430 M
+(uninit.c:6:28: warning: unused parameter 'argv' [-Wunused-parameter]) s
+25.8 418 M (24:) s
+52.2 418 M
+( int main \(int argc, char **argv\) {) s
+25.8 406 M (25:) s
+52.2 406 M
+(                            ^) s
+25.8 394 M (26:) s
+52.2 394 M
+(uninit.c:8:11: warning: 'pointer' is used uninitialized in this function) s
+5 382 M
+( [-Wuninitialized]) s
+25.8 370 M (27:) s
+52.2 370 M
+(    printf \("pointer=%p\\n", pointer\);) s
+25.8 358 M (28:) s
+52.2 358 M
+(           ^) s
+25.8 346 M (29:) s
+52.2 346 M
+(uninit.c:11:11: warning: 'foo' is used uninitialized in this function [-) s
+5 334 M
+(Wuninitialized]) s
+25.8 322 M (30:) s
+52.2 322 M
+(    printf \("foo=%d\\n", foo\);) s
+25.8 310 M (31:) s
+52.2 310 M
+(           ^) s
+_R
+S
+%%Trailer
+%%Pages: 7
+%%DocumentNeededResources: font Times-Roman Courier-Bold Times-Bold 
+%%EOF

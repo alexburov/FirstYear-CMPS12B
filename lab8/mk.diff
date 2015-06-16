@@ -1,0 +1,17 @@
+#!/bin/sh
+# $Id$
+echo TEST 1
+diff test1.perl.stdout test1.stdout
+diff test1.perl.stderr test1.stderr
+diff test1.perl.status test1.status
+
+
+echo TEST 2
+diff test2.perl.stdout test2.stdout
+diff test2.perl.stderr test2.stderr
+diff test2.perl.status test2.status
+
+echo TEST 3
+diff test3.perl.stdout test3.stdout
+diff test3.perl.stderr test3.stderr
+diff test3.perl.status test3.status

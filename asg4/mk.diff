@@ -1,0 +1,5 @@
+#!/bin/sh
+diff test1.out test1.dc.out
+diff test2.out test2.dc.out
+diff test3.out test3.dc.out
+diff test4.out test4.dc.out

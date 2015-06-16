@@ -1,0 +1,9 @@
+#!/bin/sh -x
+# $Id: mk.build,v 1.2 2013-01-24 19:37:02-08 - - $
+#
+# This does the build and runs checksource.
+#
+PATH=$PATH:/afs/cats.ucsc.edu/courses/cmps012b-wm/bin
+checksource README Makefile *.java 2>&1 | tee checksource.log
+partnercheck 2>&1 | tee partnercheck.log
+gmake 2>&1 | tee gmake.log

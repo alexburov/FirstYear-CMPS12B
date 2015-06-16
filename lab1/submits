@@ -1,0 +1,9 @@
+     Submit:  hello.java
+     Submit:  mkhello
+     Submit:  testhello
+     Submit:  ~/.bashrc
+     Submit:  ~/.bashrc
+     Submit:  links
+        bash-27$ grep Submit: *.tt
+     This will list all of the lines with the string ``Submit:''.  Cut
+     Submit:  submits

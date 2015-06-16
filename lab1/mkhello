@@ -1,0 +1,10 @@
+#!/bin/bash
+# $Id$
+# Olexiy Burov, oburov@ucsc.edu
+cid hello.java
+javac hello.java
+echo Main-class: hello >Manifest
+jar cvfm hello Manifest hello.class
+chmod +x hello
+rm hello.class Manifest
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+# $Id: mk,v 1.1 2015-02-08 21:02:39-08 - - $
+# Author Olexiy Burov, oburov@ucsc.edu
+gcc -g -O0 -Wall -Wextra -std=gnu99 cmatch.c -o cmatch

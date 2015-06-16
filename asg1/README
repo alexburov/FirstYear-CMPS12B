@@ -1,0 +1,11 @@
+Dear Reader,
+
+In this text file I'll try to describe all the important aspects of my program to you as a grader. My program comsists of 4 .java source files: jcal.java, misclib.java, year.java, month.java. In order to avoid complexity and unaesthetuc aproach of using rough 3d array, I designated this job to two classes:
+month.java is a two-dimensional array[6][7] (6 and 7 stands for WEEKS_IN_THE_MOTNH and DAYS_IN_THE_WEEK, which in code look like constants). The array values are filled with java.util.GregorianCalendar class.
+year.java is an array of objects of class month. Such organization feels natural and easy to work for me.
+I've modified Makefile accordingly to compile and to put all of my additional java source files into jar properly. The other things are pretty straightforward, each method and instance variable is commented.
+Thank you, for paying attention to my work.
+
+Best,
+
+Olexiy Burov, oburov@ucsc.edu.
